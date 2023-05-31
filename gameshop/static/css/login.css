@@ -1,0 +1,144 @@
+:root {
+--primary-color: hsl(4, 90%, 58%);
+--secondary-color: #6c757d;
+--font-color: #343a40;
+--bg-color: #f8f9fa;
+--border-color: #dee2e6;
+}
+
+/* Global styles */
+
+*{
+box-sizing: border-box;
+padding: 0;
+}
+body {
+font-family: Arial, sans-serif;
+font-size: 16px;
+color: var(--font-color);
+background-color: var(--bg-color);
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 23px;
+}
+
+.logo {
+  max-height: 60px;
+  padding: 0 200px 0 0;
+}
+
+.logo-catalog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+max-width: 500px;
+margin: 0 auto;
+padding-top: 100px;
+}
+
+.wrapper {
+display: flex;
+justify-content: center;
+}
+
+.login-form {
+width: 100%;
+max-width: 400px;
+background-color: #fff;
+padding: 40px;
+border-radius: 5px;
+box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+text-align: center;
+margin-bottom: 30px;
+}
+
+.form-group {
+margin-bottom: 20px;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 5px;
+font-weight: 500;
+}
+
+.form-group input {
+width: 100%;
+padding: 10px;
+border-radius: 5px;
+border: 1px solid var(--border-color);
+transition: border-color 0.2s ease-in-out;
+}
+
+.form-group input:focus {
+outline: none;
+border-color: var(--primary-color);
+}
+
+.btn {
+display: block;
+width: 100%;
+padding: 10px;
+margin-top: 20px;
+font-size: 16px;
+font-weight: 500;
+color: #fff;
+background-color: var(--primary-color);
+border: none;
+border-radius: 5px;
+transition: background-color 0.2s ease-in-out;
+}
+input:required:invalid {
+  border-color: red;
+}
+
+input:required:valid {
+  border-color: green;
+}
+.btn:hover {
+background-color: hsl(4, 67%, 51%);
+}
+
+.alert {
+padding: 15px;
+margin-bottom: 20px;
+border-radius: 5px;
+}
+
+.alert-danger {
+color: #721c24;
+background-color: #f8d7da;
+border-color: #f5c6cb;
+}
+
+a.registration-link {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  background-color: var(--primary-color);
+  padding: 7px 20px;
+  border-radius: 5px;
+  margin-left: 25px;
+  transition: background-color 0.3s ease;
+}
+
+a.registration-link:hover {
+  background-color: hsl(4, 67%, 51%);
+}
+
+p.text-registration-link{
+  float: right;
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/buy_games.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'slick/slick-theme.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'slick/slick.css' %}" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="{% static 'slick/slick.min.js' %}"></script>
+    <link rel="icon" href="{% static 'system_image\game-store.svg' %}">
+    <title>{{ game.name }}</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo-catalog">
+            <a href="{% url 'mainpage' %}"><img class="logo" src="{% static 'system_image\game-store.svg' %}"
+                    alt="Online Game Store"></a>
+            <a class="catalog" href="{% url 'catalog' %}">Каталог</a>
+        </div>
+
+        <div class="border-login">
+            {% if is_authorized%}
+            <a class='User' href="{% url 'profile' %}">{{ username }}</a>
+            {% else %}
+            <a class="login" href="{% url 'loginpage' %}">Вход</a>
+            {% endif %}
+            <a href="{% url 'basket' %}" class="cart-link">
+                <img src="{% static 'system_image\basket.svg' %}" alt='Корзина'>
+            </a>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="container-info">
+                <div class="game-info">
+                    <img src="{{ title_photo.photo.url }}" alt="Изображение игры">
+                    <div class="game-info__buy">
+                        <h1 class="title">Купить {{ game.name}}</h1>
+                        <form action="{% url 'add_to_cart' game.id %}" method='post'>
+                            {% csrf_token %}
+                            <button class="buy-btn">В корзину</button> Цена: {{game.price}}₽
+                        </form>
+                        <p>Жанр: {{category}}</p>
+                        <p>Разработчик: Имя разработчика</p>
+                        <p>Дата выхода: {{ game.released }}</p>
+                        <h1 class="title">Об игре:</h1>
+                        <p class='info'>{{ game.information }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-system-requirements">
+                <div class="system-requirements">
+                    <a class="system-requirements__title">Минимальные
+                        системные требования:</a>
+                    <ul id="msr" class="system-requirements__list">
+                        <li class="system-requirements__list-item">ОС: Windows 10 (64-bit)</li>
+                        <li class="system-requirements__list-item">Процессор: Intel Core i5-3470 или AMD FX-8350</li>
+                        <li class="system-requirements__list-item">Оперативная память: 8 GB ОЗУ</li>
+                        <li class="system-requirements__list-item">Видеокарта: NVIDIA GeForce GTX 660 или AMD Radeon HD
+                            7870
+                        </li>
+                        <li class="system-requirements__list-item">Место на жестком диске: 50 GB</li>
+                    </ul>
+
+                    <a class="system-requirements__title">Рекомендованные
+                        системные требования:</a>
+                    <ul id="rsr" class="system-requirements__list">
+                        <li class="system-requirements__list-item">ОС: Windows 10 (64-bit)</li>
+                        <li class="system-requirements__list-item">Процессор: Intel Core i5-3470 или AMD FX-8350</li>
+                        <li class="system-requirements__list-item">Оперативная память: 8 GB ОЗУ</li>
+                        <li class="system-requirements__list-item">Видеокарта: NVIDIA GeForce GTX 660 или AMD Radeon HD
+                            7870
+                        </li>
+                        <li class="system-requirements__list-item">Место на жестком диске: 50 GB</li>
+                    </ul>
+                </div>
+                <div class="slider single-slide">
+                    {% for img in game_photo %}
+                    <div class="slick-slide slick-cloned" style="width: 560px;">
+                        <img src="{{ img.photo.url }}" alt="{{ photo.title }}">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="reviews">
+                {% if is_buyed %}
+                <h1 class="title">Добавить отзыв:</h1>
+                <form method="POST" action="{% url 'add_review' game.id %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="author">Имя:</label>
+                        <input type="text" class="form-control" id="author" name="author" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review">Отзыв:</label>
+                        <textarea class="form-control" id="review" name="review" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+                {% else %}
+                <div>
+                    <p>Вы не купили эту игру</p>
+                </div>
+                {% endif %}
+                <h1 class="title">Отзывы:</h1>
+                {% if review %}
+                <ul class="reviews-list">
+                    {% for review in review %}
+                    <li>
+                        <p><strong>Автор: {{ review.author }}</strong></p>
+                        <p class="review">{{ review.reviews }}</p>
+                        <p>Написано: {{ review.created }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>Отзывов пока нет.</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </main>
+    <script>
+        $(document).ready(function () {
+            $('.single-slide').slick({
+                autoplay: true,
+                arrows: false,
+                dots: true
+            });
+        });
+    </script>
+</body>
+
+</html>

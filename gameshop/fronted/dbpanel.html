@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/dbpanel.css' %}">
+    <link rel="icon" href="{% static 'system_image\game-store.svg' %}">
+    <title>dbpanel</title>
+  </head>
+  
+  <body>
+    <header>
+      <div class="logo-catalog">
+        <a href="{% url 'mainpage' %}"><img class="logo" src="{% static 'system_image\game-store.svg' %}"
+            alt="Online Game Store"></a>
+        <a class="catalog" href="{% url 'catalog' %}">Каталог</a>
+      </div>
+  
+      <div class="border-login">
+        {% if is_authorized%}
+        <a class='User' href="{% url 'profile' %}">{{ username }}</a>
+        {% else %}
+        <a class="login" href="{% url 'loginpage' %}">Вход</a>
+        {% endif %}
+        <a href="{% url 'basket' %}" class="cart-link">
+          <img src="{% static 'system_image\basket.svg' %}" alt='Корзина'>
+        </a>
+      </div>
+    </header>
+<head>
+    <title>Панель базы данных</title>
+</head>
+<body>
+    <h1>Панель базы данных</h1>
+
+    <h2>Buyers</h2>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Telephone Number</th>
+            <th>Last login</th>
+            <th>Is superuser</th>
+            <!-- Добавьте другие поля модели Buyer по необходимости -->
+        </tr>
+        {% for buyer in buyers %}
+        <tr>
+            <td>{{ buyer.username }}</td>
+            <td>{{ buyer.age }}</td>
+            <td>{{ buyer.email }}</td>
+            <td>{{ buyer.tel_number }}</td>
+            <td>{{ buyer.last_login }}</td>
+            <td>{{ buyer.is_superuser }}</td>
+            <!-- Отобразите другие поля модели Buyer по необходимости -->
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Повторите аналогичные блоки для остальных моделей -->
+
+    <h2>Categories</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Information</th>
+        </tr>
+        {% for category in categories %}
+        <tr>
+            <td>{{ category.name_category }}</td>
+            <td>{{ category.information }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Games</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Information</th>
+            <th>Released</th>
+            <th>Category</th>
+            <th>Availability</th>
+        </tr>
+        {% for game in games %}
+        <tr>
+            <td>{{ game.name }}</td>
+            <td>{{ game.price }}</td>
+            <td>{{ game.information }}</td>
+            <td>{{ game.released }}</td>
+            <td>{{ game.category }}</td>
+            <td>{{ game.availability }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>Orders</h2>
+    <table>
+        <tr>
+            <th>Buyer</th>
+            <th>Created</th>
+            <th>Compleat</th>
+        </tr>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.buyer.username }}</td>
+            <td>{{ order.created }}</td>
+            <td>{{ order.compleat }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>Pre_order</h2>
+    <table>
+        <tr>
+            <th>Game</th>
+            <th>Count</th>
+            <th>Buyer</th>
+            <th>Order</th>
+        </tr>
+        {% for pre_order in pre_orders %}
+        <tr>
+            <td>{{ pre_order.id_game.name }}</td>
+            <td>{{ pre_order.count }}</td>
+            <td>{{ pre_order.buyer.username }}</td>
+            <td>{{ pre_order.order.id }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>Reviews</h2>
+    <table>
+        <tr>
+            <th>Author</th>
+            <th>Reviews</th>
+            <th>Created</th>
+            <th>Game</th>
+        </tr>
+        {% for review in reviews %}
+        <tr>
+            <td>{{ review.author }}</td>
+            <td>{{ review.reviews }}</td>
+            <td>{{ review.created }}</td>
+            <td>{{ review.game_id.name }}</td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+</body>
+</html>
+</body>
+</html>

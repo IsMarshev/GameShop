@@ -1,0 +1,238 @@
+:root {
+    --primary-color: hsl(4, 90%, 58%);
+    --secondary-color: #6c757d;
+    --font-color: #343a40;
+    --bg-color: #f8f9fa;
+    --border-color: #dee2e6;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 23px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    max-height: 60px;
+    padding: 0 200px 0 0;
+}
+
+.logo-catalog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.catalog {
+    font-size: 20px;
+    padding: 5px 10px;
+    border: 2px solid #000000;
+    color: #010101;
+    border-radius: 20px;
+}
+
+.border-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 5px 12px 5px 12px;
+}
+
+.cart-link img {
+    height: 40px;
+    margin-right: 5px;
+}
+
+
+.login {
+    font-size: 20px;
+    padding: 5px 10px;
+    border: 2px solid #000000;
+    color: #010101;
+    border-radius: 20px;
+}
+
+/* ----------------------------------------------------------- */
+.title {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 10px 30px 20px 30px
+}
+
+.tab {
+    overflow: auto;
+    margin: 10px auto 20px 20%;
+    float: left;
+}
+
+.tab button {
+    border-radius: 5px;
+    background-color: hsl(4, 90%, 58%);
+    margin-right: 20px;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.tab button:hover {
+    background-color: hsl(4, 64%, 48%);
+}
+
+.tab button.active {
+    background-color: hsl(4, 64%, 48%);
+}
+
+/* Стили для контента вкладок */
+.tabcontent .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+}
+.Profile-content {
+    display: block;
+    padding: 6px 12px;
+    border-top: none;
+}
+.profile {
+    width: 100%;
+    max-width: fit-content;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+    float:left;
+}
+
+.profile p {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.profile p:first-child {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.profile p:last-child {
+    font-size: 20px;
+    color: #333;
+}
+
+.profile p:nth-child(3) {
+    text-transform: lowercase;
+}
+.Order {
+    margin: 20px 0;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+  }
+  
+  .table th,
+  .table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+  
+  .table th {
+    font-weight: bold;
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  
+  .table td:first-child {
+    font-weight: bold;
+  }
+  
+  .table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  .Card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    width: 500px;
+    max-width: 100%;
+    background-color: #fff;
+  }
+  
+  .Card h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .Card form {
+    margin-bottom: 20px;
+  }
+  
+  .Card input[type="text"],
+  .Card input[type="date"],
+  .Card input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .Card input[type="submit"] {
+    background-color: hsl(4, 90%, 58%);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .Card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .Card li {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  

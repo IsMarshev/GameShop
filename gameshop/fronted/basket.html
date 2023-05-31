@@ -1,0 +1,75 @@
+{% load static %}
+{% load mul_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/basket.css' %}">
+    <link rel="icon" href="{% static 'system_image\game-store.svg' %}">
+    <title>Cart</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo-catalog">
+            <a href="{% url 'mainpage' %}"><img class="logo" src="{% static 'system_image\game-store.svg' %}"
+                    alt="Online Game Store"></a>
+            <a class="catalog" href="{% url 'catalog' %}">Каталог</a>
+        </div>
+
+        <div class="border-login">
+            {% if is_authorized%}
+            <a class='User' href="{% url 'profile' %}">{{ username }}</a>
+            {% else %}
+            <a class="login" href="{% url 'loginpage' %}">Вход</a>
+            {% endif %}
+            <a href="{% url 'basket' %}" class="cart-link">
+                <img src="{% static 'system_image\basket.svg' %}" alt='Корзина'>
+            </a>
+        </div>
+    </header>
+    <div class="container">
+        <h1>Корзина</h1>
+        {% if is_null %}
+        <p>Корзина пустая</p>
+        {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Игра</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Всего</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in pre_orders %}
+                <tr>
+                    <td>{{ item.id_game.name }}</td>
+                    <td>{{ item.id_game.price }}₽</td>
+                    <td>{{ item.count }}</td>
+                    <td>{{ item.id_game.price|mul:item.count }}₽</td>
+                    <td>
+                        <form method="post" action="{% url 'remove-from-cart' pre_order_id=item.id %}">
+                            {% csrf_token %}
+                            <button type="submit"><img src="{% static 'system_image\bin.svg' %}" alt='Корзина'></button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="total">
+            <span>Total:</span>
+            <span>{{ total }}</span>
+        </div>
+        <a href="{% url 'order_success' %}" class="checkout-button">Купить</a>
+        {% endif %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+{% load static %}
+{% load shop_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Game Store</title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="icon" href="{% static 'system_image\game-store.svg' %}">
+</head>
+<body>
+  <header>
+    <div class="logo-catalog">
+      <a href="{% url 'mainpage' %}"><img class="logo" src="{% static 'system_image\game-store.svg' %}" alt="Online Game Store"></a>
+      <a class = "catalog" href="{% url 'catalog' %}">Каталог</a>
+    </div>
+     
+    <div class = "border-login">
+      {% if is_authorized%}
+        <a class='User' href="{% url 'profile' %}">{{ username }}</a>
+      {% else %}
+        <a class = "login" href="{% url 'loginpage' %}">Вход</a>
+      {% endif %}
+      <a href="{% url 'basket' %}" class="cart-link">
+        <img src = "{% static 'system_image\basket.svg' %}" alt = 'Корзина'>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <h2 class="label">Популярные игры</h2>
+    <section class="featured-games">   
+    {% for game in games%}
+      <div class="game-card">
+        <a href = "{% url 'game' game.id %}">
+          {% with photos=game_photo|get_item:game.id %}
+            {% if photos.exists %}
+              <img src="{{ photos.first.photo.url }}" alt="Изображение игры">
+            {% endif %}
+          {% endwith %}
+          <div class="details">
+            <h3>{{ game.name }}</h3>
+            <p>{{ game.price }}₽</p>
+          </div>
+        </a>
+        <form action="{% url 'add_to_cart' game.id %}" method='post'>
+          {% csrf_token %}
+          <button class="buy-btn">Купить</button>
+        </form>
+      </div>
+      {% endfor %}
+    </section>
+    <h2 class="label">Новинки</h2>
+    <section class="new-games">
+        {% for game in new_games%}
+        <div class="game-card">
+          <a href = "{% url 'game' game.id %}">
+            {% with photos=game_photo|get_item:game.id %}
+              {% if photos.exists %}
+                <img src="{{ photos.first.photo.url }}" alt="Изображение игры">
+              {% endif %}
+            {% endwith %}
+            <div class="details">
+              <h3>{{ game.name }}</h3>
+              <p>{{ game.price }}₽</p>
+            </div>
+          </a>
+          <form action="{% url 'add_to_cart' game.id %}" method='post'>
+            {% csrf_token %}
+            <button class="buy-btn">Купить</button>
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+   

@@ -1,0 +1,104 @@
+{% load static %}
+{% load shop_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="icon" href="{% static 'system_image\game-store.svg' %}">
+</head>
+
+<body>
+    <header>
+        <div class="logo-catalog">
+            <a href="{% url 'mainpage' %}"><img class="logo" src="{% static 'system_image\game-store.svg' %}"
+                    alt="Online Game Store"></a>
+            <a class="catalog" href="{% url 'catalog' %}">Каталог</a>
+        </div>
+
+        <div class="border-login">
+            {% if is_authorized%}
+            <a class='User' href="{% url 'profile' %}">{{ username }}</a>
+            {% else %}
+            <a class="login" href="{% url 'loginpage' %}">Вход</a>
+            {% endif %}
+            <a href="{% url 'basket' %}" class="cart-link">
+                <img src="{% static 'system_image\basket.svg' %}" alt='Корзина'>
+            </a>
+        </div>
+    </header>
+    <main>
+        <h1 class="title">Здраствуйте, {{ username }}</h1>
+
+        <div id="Профиль" class="Profile-content">
+            <div class="profile">
+                <p>Никнейм: {{ username }}</p>
+                <p>Возраст: {{ user.age }}</p>
+                <p>Почта: {{ user.email }}</p>
+                <p>Номер телефона: +7{{ user.tel_number }}</p>
+            </div>
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'Заказы')">Заказы</button>
+                <div id="Заказы" class="tabcontent">
+                    <div class="Order">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Товар</th>
+                                    <th>Дата</th>
+                                    <th>Цена</th>
+                                    <th>Статус</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in user_orders %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>
+                                        {% for game in game_names|get_item:order.id%}
+                                            {{ game }}{% if not loop.last %}, {% endif %}<br>
+                                        {% endfor %}
+                                    </td>
+                                    <td>{{ order.created }}</td>
+                                    <td>{{ price|get_item:order.id }}</td>
+                                    <td>{{ order.compleate }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Выйти</button>
+        </form>
+    </main>
+    <script>
+        function openTab(evt, tabName) {
+            // Получаем все элементы с классом "tabcontent" и прячем их
+            var tabcontent = document.getElementsByClassName("tabcontent");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            // Получаем все элементы с классом "tablinks" и убираем класс "active"
+            var tablinks = document.getElementsByClassName("tablinks");
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            // Отображаем содержимое текущей вкладки и добавляем класс "active" к кнопке
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+        // По умолчанию открываем первую вкладку
+        document.getElementsByClassName("tablinks")[0].click();
+    </script>
+</body>
+
+</html>

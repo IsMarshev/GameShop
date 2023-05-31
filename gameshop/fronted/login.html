@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    <link rel="icon" href="{% static 'system_image\game-store.svg' %}">
+</head>
+<header>
+  <div class="logo-catalog">
+    <a href="{% url 'mainpage' %}"><img class="logo" src="{% static 'system_image\game-store.svg' %}" alt="Online Game Store"></a>
+  </div>
+</header>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div class="login-form">
+                <h2>Авторизация</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                </form>
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                {% endif %}
+                <p class="text-registration-link">Нет аккаунта?<a class='registration-link' href="{% url 'regpage' %}">Регистрация</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
