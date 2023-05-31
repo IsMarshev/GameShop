@@ -14,7 +14,9 @@
 3. Страница игр, каталог.
 4. Страница профиля, корзина, реализция псевдо-покупки.
 # ----------------------------------------------------------
-![Главная страница](https://github.com/IsMarshev/GameShop/blob/main/image/Game%20page.jpeg)
-![Страница с игрой](https://github.com/IsMarshev/GameShop/blob/main/image/Main%20page.jpeg)
+Главная страница
+![Главная страница](https://github.com/IsMarshev/GameShop/blob/main/image/Main%20page.jpeg)
+Страница с игрой
+![Страница с игрой](https://github.com/IsMarshev/GameShop/blob/main/image/Game%20page.jpeg)
 # Примечание
 Для того чтобы сайт заработал, нужно зарегестрировать базу данных в настройках.
